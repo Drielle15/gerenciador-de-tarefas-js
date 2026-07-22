@@ -1,0 +1,161 @@
+/* ESTILOS DA PÁGINA */
+body {
+  background-color: #f7f6f5;
+  font-family: Arial;
+  margin: 20px;
+}
+
+header {
+  background-color: #052945;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+/* CAIXAS DOS CONTADORES */
+.counters-container {
+  margin-bottom: 20px;
+  height: 80px;
+}
+
+.counter-card {
+  background-color: #ffffff;
+  width: 30%;
+  float: left;
+  margin-right: 3%;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.counter-card.baixa {
+  border-top: 5px solid #4caf50;
+}
+
+.counter-card.media {
+  border-top: 5px solid #ffc107;
+}
+
+.counter-card.alta {
+  border-top: 5px solid #f44336;
+}
+
+.counter-card h3 {
+  font-size: 14px;
+  color: #333;
+}
+
+.counter-card span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* FORMULÁRIO */
+.form-container {
+  background-color: #ffffff;
+  padding: 15px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  clear: both;
+}
+
+.form-container h2 {
+  color: #052945;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.input-field {
+  margin-bottom: 10px;
+}
+
+.input-field label {
+  display: block;
+  font-size: 14px;
+}
+
+.input-field input, 
+.input-field select, 
+.input-field textarea {
+  width: 98%;
+  padding: 5px;
+  border: 1px solid #999;
+}
+
+.btn-submit {
+  background-color: #052945;
+  color: #ffffff;
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+/* COLUNAS */
+.board-container {
+  width: 100%;
+}
+
+.column {
+  background-color: #ffffff;
+  width: 31%;
+  float: left;
+  margin-right: 2%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  min-height: 300px;
+  box-sizing: border-box;
+}
+
+.column-title {
+  color: #052945;
+  font-size: 16px;
+  border-bottom: 2px solid #052945;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+}
+
+/* CARDS */
+.task-card {
+  background-color: #f7f6f5;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+
+.task-card.prioridade-baixa {
+  border-left: 6px solid #4caf50;
+}
+
+.task-card.prioridade-media {
+  border-left: 6px solid #ffc107;
+}
+
+.task-card.prioridade-alta {
+  border-left: 6px solid #f44336;
+}
+
+.task-card h3 {
+  color: #052945;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.task-card h2 {
+  font-size: 12px;
+  font-weight: normal;
+  color: #444;
+  margin: 2px 0;
+}
+
+.task-card p {
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+.task-actions a {
+  font-size: 11px;
+  color: #052945;
+  margin-right: 5px;
+  cursor: pointer;
+}

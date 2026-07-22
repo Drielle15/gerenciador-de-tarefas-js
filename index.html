@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciador de Tarefas</title>
+  <link rel="stylesheet" href="css/style_gerenciador.css">
+</head>
+<body>
+
+  <header>
+    <h1>Gerenciador de Tarefas</h1>
+  </header>
+
+  <!-- CONTADORES DE PRIORIDADE -->
+  <section class="counters-container">
+    <div class="counter-card baixa">
+      <h3>Prioridade Baixa</h3>
+      <span id="count-baixa">0</span>
+    </div>
+    <div class="counter-card media">
+      <h3>Prioridade Média</h3>
+      <span id="count-media">0</span>
+    </div>
+    <div class="counter-card alta">
+      <h3>Prioridade Alta</h3>
+      <span id="count-alta">0</span>
+    </div>
+  </section>
+
+  <!-- FORMULÁRIO -->
+  <section class="form-container">
+    <h2>Cadastrar Nova Tarefa</h2>
+    <form id="taskForm">
+      <div class="form-group">
+        <div class="input-field">
+          <label for="titulo">Tarefa:</label>
+          <input type="text" id="titulo" required placeholder="Ex: Ajustar Banco de Dados">
+        </div>
+        <div class="input-field">
+          <label for="responsavel">Responsável:</label>
+          <input type="text" id="responsavel" required placeholder="Ex: João Silva">
+        </div>
+        <div class="input-field">
+          <label for="prioridade">Prioridade:</label>
+          <select id="prioridade" required>
+            <option value="Baixa">Baixa</option>
+            <option value="Média">Média</option>
+            <option value="Alta">Alta</option>
+          </select>
+        </div>
+        <div class="input-field">
+          <label for="data">Data de Realização:</label>
+          <input type="date" id="data" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-field full-width">
+          <label for="descricao">Descrição da Tarefa:</label>
+          <textarea id="descricao" required placeholder="Descreva os detalhes da tarefa..."></textarea>
+        </div>
+      </div>
+      <button type="submit" class="btn-submit">Adicionar Tarefa</button>
+    </form>
+  </section>
+
+  <!-- QUADRO KANBAN -->
+  <section class="board-container">
+    <!-- COLUNA ABERTO -->
+    <div class="column" id="col-aberto">
+      <h2 class="column-title">Aberto</h2>
+      <div class="task-list" id="list-aberto"></div>
+    </div>
+
+    <!-- COLUNA EM ANDAMENTO -->
+    <div class="column" id="col-andamento">
+      <h2 class="column-title">Em Andamento</h2>
+      <div class="task-list" id="list-andamento"></div>
+    </div>
+
+    <!-- COLUNA FINALIZADA -->
+    <div class="column" id="col-finalizada">
+      <h2 class="column-title">Finalizada</h2>
+      <div class="task-list" id="list-finalizada"></div>
+    </div>
+  </section>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

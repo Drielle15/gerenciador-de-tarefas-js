@@ -1,7 +1,6 @@
-/* ESTILOS DA PÁGINA */
 body {
   background-color: #f7f6f5;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   margin: 20px;
 }
 
@@ -9,153 +8,75 @@ header {
   background-color: #052945;
   color: #ffffff;
   text-align: center;
-  padding: 10px;
+  padding: 15px;
   margin-bottom: 20px;
 }
 
-/* CAIXAS DOS CONTADORES */
-.counters-container {
-  margin-bottom: 20px;
-  height: 80px;
-}
-
+/* Contadores */
 .counter-card {
-  background-color: #ffffff;
+  display: inline-block;
   width: 30%;
-  float: left;
-  margin-right: 3%;
-  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid gray;
   text-align: center;
-  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px;
 }
+.baixa { border-top: 5px solid #4caf50; }
+.media { border-top: 5px solid #ffc107; }
+.alta { border-top: 5px solid #f44336; }
 
-.counter-card.baixa {
-  border-top: 5px solid #4caf50;
-}
-
-.counter-card.media {
-  border-top: 5px solid #ffc107;
-}
-
-.counter-card.alta {
-  border-top: 5px solid #f44336;
-}
-
-.counter-card h3 {
-  font-size: 14px;
-  color: #333;
-}
-
-.counter-card span {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-/* FORMULÁRIO */
+/* Formulário */
 .form-container {
   background-color: #ffffff;
+  border: 1px solid gray;
   padding: 15px;
-  border: 1px solid #ccc;
-  margin-bottom: 20px;
-  clear: both;
+  margin: 20px 0;
 }
-
-.form-container h2 {
-  color: #052945;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.input-field {
-  margin-bottom: 10px;
-}
-
-.input-field label {
-  display: block;
-  font-size: 14px;
-}
-
-.input-field input, 
-.input-field select, 
-.input-field textarea {
-  width: 98%;
+input, select, textarea {
+  width: 95%;
   padding: 5px;
-  border: 1px solid #999;
+  margin-bottom: 10px;
+  border: 1px solid gray;
 }
-
-.btn-submit {
+button {
   background-color: #052945;
   color: #ffffff;
-  padding: 8px 15px;
   border: none;
-  cursor: pointer;
+  padding: 8px 15px;
 }
 
-/* COLUNAS */
-.board-container {
-  width: 100%;
-}
-
+/* Colunas */
 .column {
+  display: inline-block;
+  width: 30%;
   background-color: #ffffff;
-  width: 31%;
-  float: left;
-  margin-right: 2%;
+  border: 1px solid gray;
   padding: 10px;
-  border: 1px solid #ccc;
-  min-height: 300px;
-  box-sizing: border-box;
+  margin: 5px;
+  vertical-align: top;
 }
-
-.column-title {
+.column h2 {
   color: #052945;
-  font-size: 16px;
   border-bottom: 2px solid #052945;
   margin-bottom: 10px;
-  padding-bottom: 5px;
 }
 
-/* CARDS */
+/* Cards */
 .task-card {
   background-color: #f7f6f5;
+  border: 1px solid gray;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ddd;
 }
-
-.task-card.prioridade-baixa {
-  border-left: 6px solid #4caf50;
-}
-
-.task-card.prioridade-media {
-  border-left: 6px solid #ffc107;
-}
-
-.task-card.prioridade-alta {
-  border-left: 6px solid #f44336;
-}
-
-.task-card h3 {
-  color: #052945;
-  font-size: 15px;
-  margin-bottom: 5px;
-}
-
-.task-card h2 {
-  font-size: 12px;
-  font-weight: normal;
-  color: #444;
-  margin: 2px 0;
-}
-
-.task-card p {
-  font-size: 13px;
-  margin: 8px 0;
-}
-
+.prioridade-baixa { border-left: 5px solid #4caf50; }
+.prioridade-media { border-left: 5px solid #ffc107; }
+.prioridade-alta { border-left: 5px solid #f44336; }
+.task-card h3 { color: #052945; }
+.task-card h2 { font-size: 14px; font-weight: normal; }
+.task-card p { font-size: 13px; }
 .task-actions a {
-  font-size: 11px;
   color: #052945;
-  margin-right: 5px;
-  cursor: pointer;
+  text-decoration: none;
+  margin-right: 10px;
 }

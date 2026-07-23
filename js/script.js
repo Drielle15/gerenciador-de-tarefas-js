@@ -1,15 +1,8 @@
-// ARRAY DE ARMAZENAMENTO DAS TAREFAS
 let tarefas = [];
+const form = document.getElementById('taskForm');
 
-// SELEÇÃO DOS ELEMENTOS DO DOM
-const taskForm = document.getElementById('taskForm');
-const listAberto = document.getElementById('list-aberto');
-const listAndamento = document.getElementById('list-andamento');
-const listFinalizada = document.getElementById('list-finalizada');
-
-// EVENTO AO ENVIAR O FORMULÁRIO
-taskForm.addEventListener('submit', function(e) {
-  e.preventDefault();
+form.onsubmit = function(event) {
+  event.preventDefault();
 
   const novaTarefa = {
     id: Date.now(),
@@ -18,101 +11,66 @@ taskForm.addEventListener('submit', function(e) {
     prioridade: document.getElementById('prioridade').value,
     data: document.getElementById('data').value,
     descricao: document.getElementById('descricao').value,
-    status: 'aberto' // Toda tarefa nova inicia como 'aberto'
+    status: 'aberto'
   };
 
   tarefas.push(novaTarefa);
-  taskForm.reset();
-  renderizarTarefas();
-});
+  form.reset();
+  mostrarTarefas();
+};
 
-// MUDAR STATUS DA TAREFA (ABERTO, ANDAMENTO, FINALIZADA)
 function moverTarefa(id, novoStatus) {
-  tarefas = tarefas.map(task => {
-    if (task.id === id) {
-      return { ...task, status: novoStatus };
-    }
-    return task;
-  });
-  renderizarTarefas();
+  tarefas = tarefas.map(t => t.id === id ? {...t, status: novoStatus} : t);
+  mostrarTarefas();
 }
 
-// EXCLUIR TAREFA
-function excluirTarefa(id) {
-  tarefas = tarefas.filter(task => task.id !== id);
-  renderizarTarefas();
-}
-
-// ATUALIZA A TELA E OS CONTADORES
-function renderizarTarefas() {
-  // Limpa as listas na tela
+function mostrarTarefas() {
+  const listAberto = document.getElementById('list-aberto');
+  const listAndamento = document.getElementById('list-andamento');
+  const listFinalizada = document.getElementById('list-finalizada');
   listAberto.innerHTML = '';
   listAndamento.innerHTML = '';
   listFinalizada.innerHTML = '';
 
-  // Zera os contadores
-  let countBaixa = 0;
-  let countMedia = 0;
-  let countAlta = 0;
+  let contBaixa = 0, contMedia = 0, contAlta = 0;
 
-  tarefas.forEach(task => {
-    // Incrementa contador pela prioridade
-    if (task.prioridade === 'Baixa') countBaixa++;
-    if (task.prioridade === 'Média') countMedia++;
-    if (task.prioridade === 'Alta') countAlta++;
+  tarefas.forEach(t => {
+    if (t.prioridade === 'Baixa') contBaixa++;
+    if (t.prioridade === 'Média') contMedia++;
+    if (t.prioridade === 'Alta') contAlta++;
 
-    // Formatando data para exibição no padrão brasileiro (DD/MM/AAAA)
-    const dataFormatada = task.data.split('-').reverse().join('/');
-
-    // Define a classe da borda lateral baseada na prioridade
-    const prioridadeClasse = `prioridade-${task.prioridade.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`;
-
-    // Cria o elemento visual do Card
     const card = document.createElement('div');
-    card.className = `task-card ${prioridadeClasse}`;
+    card.className = 'task-card ' +
+      (t.prioridade === 'Baixa' ? 'prioridade-baixa' :
+       t.prioridade === 'Média' ? 'prioridade-media' : 'prioridade-alta');
 
-    // Estrutura exigida no enunciado:
-    // Tag h3 -> Título
-    // Tag h2 -> Responsável, Data e Prioridade
-    // Tag p -> Descrição
+    let links = '';
+    if (t.status === 'aberto') {
+      links = `<a onclick="moverTarefa(${t.id}, 'andamento')">Em Andamento</a>
+               <a onclick="moverTarefa(${t.id}, 'finalizada')">Finalizar</a>`;
+    } else if (t.status === 'andamento') {
+      links = `<a onclick="moverTarefa(${t.id}, 'aberto')">Reabrir</a>
+               <a onclick="moverTarefa(${t.id}, 'finalizada')">Finalizar</a>`;
+    } else {
+      links = `<a onclick="moverTarefa(${t.id}, 'aberto')">Reabrir</a>
+               <a onclick="moverTarefa(${t.id}, 'andamento')">Em Andamento</a>`;
+    }
+
     card.innerHTML = `
-      <h3>${task.titulo}</h3>
-      <h2><strong>Responsável:</strong> ${task.responsavel}</h2>
-      <h2><strong>Data:</strong> ${dataFormatada}</h2>
-      <h2><strong>Prioridade:</strong> ${task.prioridade}</h2>
-      <p>${task.descricao}</p>
-      <div class="task-actions" id="actions-${task.id}"></div>
+      <h3>${t.titulo}</h3>
+      <h2>Responsável: ${t.responsavel}</h2>
+      <h2>Data: ${t.data}</h2>
+      <h2>Prioridade: ${t.prioridade}</h2>
+      <p>${t.descricao}</p>
+      <div class="task-actions">${links}</div>
     `;
 
-    const actionsDiv = card.querySelector(`#actions-${task.id}`);
-
-    // Ações dinâmicas dos links conforme o status atual
-    if (task.status === 'aberto') {
-      actionsDiv.innerHTML = `
-        <a onclick="moverTarefa(${task.id}, 'andamento')">Em Andamento</a>
-        <a onclick="moverTarefa(${task.id}, 'finalizada')">Finalizar</a>
-        <a onclick="excluirTarefa(${task.id})" style="color: #f44336; margin-left: auto;">Excluir</a>
-      `;
-      listAberto.appendChild(card);
-    } else if (task.status === 'andamento') {
-      actionsDiv.innerHTML = `
-        <a onclick="moverTarefa(${task.id}, 'aberto')">Reabrir</a>
-        <a onclick="moverTarefa(${task.id}, 'finalizada')">Finalizar</a>
-        <a onclick="excluirTarefa(${task.id})" style="color: #f44336; margin-left: auto;">Excluir</a>
-      `;
-      listAndamento.appendChild(card);
-    } else if (task.status === 'finalizada') {
-      actionsDiv.innerHTML = `
-        <a onclick="moverTarefa(${task.id}, 'aberto')">Reabrir</a>
-        <a onclick="moverTarefa(${task.id}, 'andamento')">Em Andamento</a>
-        <a onclick="excluirTarefa(${task.id})" style="color: #f44336; margin-left: auto;">Excluir</a>
-      `;
-      listFinalizada.appendChild(card);
-    }
+    if (t.status === 'aberto') listAberto.appendChild(card);
+    else if (t.status === 'andamento') listAndamento.appendChild(card);
+    else listFinalizada.appendChild(card);
   });
 
-  // Atualiza os contadores de prioridade na tela
-  document.getElementById('count-baixa').textContent = countBaixa;
-  document.getElementById('count-media').textContent = countMedia;
-  document.getElementById('count-alta').textContent = countAlta;
+  document.getElementById('count-baixa').textContent = contBaixa;
+  document.getElementById('count-media').textContent = contMedia;
+  document.getElementById('count-alta').textContent = contAlta;
 }
